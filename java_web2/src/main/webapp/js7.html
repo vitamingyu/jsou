@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>함수연습</title>
+<head></head>
+<body>
+<script>
+	let count = 0;
+	function aa(){
+		count +=1;
+		// return; 함수의 무조건 탈출
+		document.write(count + "번 수행<br>");
+	}
+	
+	function bb(){
+		document.write("<br>bb 함수처리");
+		cc(5);
+		document.write("<br>bb함수 처리 완료");
+		
+		document.write("<br>", cc(5));
+		
+		// 위 한줄과 아래 두줄이 같은 말
+		//result=cc(5);
+		//document.write("<br>",result);
+		
+		document.write("<br>", cc("kor"));
+		document.write("<br>");
+		dd(5,10);
+		dd(5);
+		dd(); // undefined로 나옴
+		dd(5,10,15); // 마지막은 무시됨
+		// 자바였으면 타입, 아규먼트 갯수가 달라 오류나고 프로그램 끝남
+		
+	}
+	function cc(arg){ // 매개변수가 있는 함수
+		let kk = arg+10;
+		document.write("<br>kk : "+kk);
+		//return undefined; // js는 반드시 값 하나를 리턴하는데 기본값이 undefined이다.
+		// 함수의 반환값은 기본이 undefined(생략하면 기본값 적용)
+		return kk;
+	}
+	
+	function dd(a,b){ // a,b는 지역변수
+		document.write("<br>", a,' ',b);
+		
+	}
+	function ee(as){
+		document.write("<br>",as);
+		//return as;
+	}
+</script>
+
+</head>
+<body>
+
+<script>
+
+	aa();
+	aa();
+	bb();
+	cc(10);
+	ee(1);
+	document.write(ee(1));
+	// 이 함수를 script밖에서 호출하면 그냥 문자값(html 내부)으로 호출됨. js내에서 함수로 가능한거
+	
+	(function kbs(){
+	document.write("<br>대한민국 대표방송")
+	})(); // 일회용, 자기 혼자 실행함
+	
+</script>
+
+
+</body>
+</html>

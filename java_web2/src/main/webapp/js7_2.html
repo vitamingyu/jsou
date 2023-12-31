@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+나만의 함수작성 2라운드<br>
+</head>
+<body>
+
+<script>
+	function f1(){
+		document.write("<br>밥은 먹었니?");
+	}
+	
+	function f2(func){ // 매개변수로 함수객체를 전달받음
+	//	func // 그냥 함수의 주소객체
+		func();  // f1함수를 호출
+	}
+
+	function f3(f){
+		// return f();
+		return f; // 반환값이 함수 객체
+	}
+	
+	//let hello = function(){   //아래  hello랑 같은 말
+		
+	// } 
+	//강사님 오류남
+	let hello = function hi(){ // 함수를 변수에 치환
+	// (f2(f1())); // f1 함수의 실행 결과를 인수로 가질 수 없다.
+		f2(f1);  // f1 함수의 객체주소가 인수
+		document.write("<br>---------");
+		
+		re=f3(f1);
+		re(); // 주소가 리턴되는거라 주소를 받아서 출력
+		f3(f1)(); // 위에랑 같은 말. f1함수 객체를 받은 후 실행
+		document.write("<br>");
+	}
+	
+	
+</script>
+<script>
+	// 일급함수 : 함수객체를 변수에 치환가능, 인수로 함수 가능, 매개 변수로 함수가능, 함수의 반환값으로 함수 가능
+	document.write("<br>---------");
+	document.write("<br>hello의 정체는 ",hello);
+	document.write("<br>---------");
+	hello();
+	world = hello;
+	world();
+</script>
+</body>
+</html>

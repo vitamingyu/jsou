@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Javascript 연습</h2>
+<script type="text/javascript">
+<!--
+	window.document.write("환영합니다");
+	window.document.write("<br><b>환영</b><i>합니다</i>");
+	
+-->
+</script>
+
+<script>
+	"use strict" // 엄격 모드. 모던한 모드(안쓰면 느슨한 모드)
+	// a=10;
+	// b=20;
+	window.document.write('<br>a:',a);
+	var a = 10; // 호이스팅 기능이 자동 발생. 비권장
+	var b = 20;
+	
+	window.document.write("<br>");
+	window.document.write(a+b);
+	
+	// window.document.write('<br>c:',c);
+	let c = 30; // 선언한 이후에만 변수 사용 가능
+	let d = 40; // js는 에러메세지를 브라우저에서 f12누르고 콘솔차에서 봐야됨
+	
+	window.document.write("<br>");
+	window.document.write(c+d);
+	
+	//개발자가 엔드유저에게 안 보여주고 싶은 내용이 있으면
+	console.log(c+b); // 표준출력장치로 출력. 브라우저 검사창에서 확인
+	
+	
+</script>
+</body>
+</html>

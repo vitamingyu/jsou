@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+	document.write("<br>js에서 함수 내의 변수 scope----<br>");
+	let a=10; // 전역 변수
+	const b=20;
+	
+	function func1(){
+		let c = 30; // 지역 변수
+		const d = 40;
+		document.write("<br>a:",a,", b:",b);
+		document.write("<br>c:",c,", d:",d);
+		function func2(){
+			let e =50; // e1은 func2 맴버
+			document.write("<br>e:",e);		
+			document.write("<br>a:",a,", b:",b); // 얘넨 전역
+			document.write("<br>c:",c,", d:",d); // 얘넨 func1맴버
+		}
+		func2();
+		// document.write("<br>e:",e); // err: e은 func2의 맴버
+	}
+	func1();
+	
+	document.write("<br>func1 밖에서 a:",a,", b:",b);
+	//이 자리에서 c1 d1 호출하면 에러남(지역변수)
+	// 함수 내에서는 함수 밖의 맴버 참조 가능
+	// 함수 밖에서는 함수 안의 맴버 참조 불가능
+	
+</script>
+</body>
+</html>

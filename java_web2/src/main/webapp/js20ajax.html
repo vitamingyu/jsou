@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		window.onload = function () {
+			document.getElementById("btnOk1").onclick = function () {
+				sijak();
+			}
+			// 위 보다 아래 두 줄이 요즘 방식
+			
+			document.querySelector("#btnOk2").onclick = sijakXML;
+			
+			document.querySelector("#btnOk3").onclick = sijakJSON;
+			document.querySelector("#btnOk3_1").onclick = sijakJSON2;
+			document.querySelector("#btnOk3_2").onclick = sijakJSON3;
+		}
+	
+		let xhr;
+		
+		function sijak() {
+			//Ajax : 비동기 방식으로 웹서버와 js 객체 간의 통신. 웹서버로 부터 부분 데이터를 수신
+			xhr = new XMLHttpRequest(); // 비동기 방식 처리 클래스
+			//alert(xhr); > object XMLHttpRequest 뜸
+			//xhr.open("요청방식(겟 혹은 포스트)", "요청파일명", true)   // true:비동기방식, false:동기방식
+			
+			//let fname = "js20.txt";
+			let fname="js20csv.txt";
+			xhr.open("get", fname, true);
+
+			xhr.onreadystatechange = function () { //통신상태확인
+				console.log(xhr.readyState);
+				/*
+				readyState 속성값
+				0: 초기화이전(uninitialized) - 객체 생성만 되고 초기화 이전, 즉, open 수행전
+				1: 로딩중(loading) - 객체 생성 및 초기화, 그러나 send 수행전
+				2: 로딩완료(loaded) - send 수행 되었으나 헤더와 status 값 미도착  
+				3: 서버 처리중(interactive) - 데이터 일부만 도착
+				4: 처리완료(completed) - 데이터 전부 도착
+				
+				status 속성값
+				200: 성공 (OK)
+				403: 접근거부 (Forbidden)
+				404: 파일 없음 (Not Found)
+				500: 서버 내부 오류 (Internal Server Error)
+				*/
+				if(xhr.readyState == 4){
+					//=통신상태 양호
+					//alert(xhr.status);
+					if(xhr.status == 200){ // 요청 성공
+						processFunction();  // callback function
+					}
+				}
+			}
+
+			xhr.send(null); // get방식이니 null. 송신, 아래 reponse로 받음(?)
+		}
+		
+		
+		function processFunction(){
+			let data = xhr.responseText;
+			//document.querySelector("#disp").innerText = data;
+			
+			//let my = document.createTextNode(data); // DOM사용
+			//document.querySelector("#disp").appendChild(my);
+			
+			//행은 엔터로 구분
+			let rowData = data.split(String.fromCharCode(13)); // ascii 코드 13:CR
+			//alert(rowData.length);
+			let str = "";
+			for(let i = 0; i < rowData.length; i++){
+				let colData = rowData[i].split(",");    // 콤마를 기준으로 짜름
+				for(let j=0; j<colData.length; j++){
+					str += colData[j] + " ";
+				}
+				str += "<hr>";
+			}
+			
+			document.querySelector("#disp").innerHTML = str;
+		}
+		
+		function sijakXML() {
+			xhr = new XMLHttpRequest();
+			xhr.open("get","js20.xml",true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === 4){
+					if(xhr.status === 200){
+						processXML();
+					}
+				}
+			}
+			xhr.send(null);
+		}
+		
+		function processXML(){
+			//let data = xhr.responseText; // xml문서는 reponseText로 읽으면 객체로 인정안됨. DOM사용불가
+			let data = xhr.responseXML; // XML객체는 이렇게 읽어줌
+			//alert(data);
+			let sangpumItem = data.getElementsByTagName("sangpum");
+			//alert(sangpumItem.length);
+			let codeItem = data.getElementsByTagName("code");
+			let sangItem = data.getElementsByTagName("sang");
+			
+			let str = "";
+			for(let i=0; i< sangpumItem.length;i++){
+				str += codeItem[i].childNodes[0].nodeValue + " ";
+				str += sangItem[i].firstChild.nodeValue+ " "; // childnodes[0]이랑 firstchild랑 같은 말
+				str += codeItem[i].getAttribute("price");
+				str += "<br>";
+			}
+			document.querySelector("#disp").innerHTML = str;
+		}
+		
+		function sijakJSON() {
+			xhr = new XMLHttpRequest();
+			xhr.open("get","js20.json",true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === 4){
+					if(xhr.status === 200){
+						processJSON();
+					}
+				}
+			}
+			xhr.send(null);
+		}
+	
+		function processJSON(){
+			let data = xhr.responseText;
+			alert(data);
+			let parseData = JSON.parse(data); // 문자열을 JSON 객체로 변환. 이제 배열 처리 가능
+			
+			let str = "";
+			//alert(parseData.sangpum.length);
+			for(let i=0; i < parseData.sangpum.length; i++){
+				str += parseData.sangpum[i].code + " "+
+					   parseData.sangpum[i].sang + "<br>";
+			}
+			document.querySelector("#disp").innerHTML = str;
+		}
+		
+		function sijakJSON2(){
+			// ECMA6이후 XMLHttpRequest를 대신해 비동기 처처리를 하는 Promise 객체 등장
+			// 내부적으로 Promise 객체를 지원하는 fetch ~ then 사용
+			// fetch(url, {method:"GET"}).then~ 이런 식으로 끌고갈 수도 있다
+			const fname = "js20.json";
+			fetch(fname).then(res => { // 변수 이름은 내 맘대로 줌
+				if(res.status === 200){
+					return res.json() // 하면 아래 .then()으로 넘어감
+				}else{
+					console.log(`http error! status= ${res.status}`)
+				}
+				
+			}).then(jsonData => {
+				processJSON2(jsonData);
+				
+			}).catch(err => {
+				console.log(err);
+			});
+		};
+		
+		function processJSON2(jsonData){
+			let str = "";
+			for(let i=0; i < jsonData.sangpum.length; i++){
+				str += jsonData.sangpum[i].code + " "+
+					   jsonData.sangpum[i].sang + "<br>";
+			}
+			document.querySelector("#disp").innerHTML = str;
+		}
+		
+		// 내부적으로 Promise 객체를 지원하는 async ~ await 사용
+		async function sijakJSON3(){
+			const fname = "js20.json";
+			const response = await fetch(fname);
+			const data = await response.json();
+			//alert(data);
+			processJSON2(data);
+		};
+		
+		
+	</script>
+</head>
+
+<body>
+	<h2>* Ajax 처리 *</h2>
+	<button id="btnOk1">Ajax 원리 이해1</button><br>
+	<button id="btnOk2">Xml 읽기</button><br>
+	<button id="btnOk3">Json 읽기</button><br>
+	<button id="btnOk3_1">Json 읽기2</button><br>
+	<button id="btnOk3_2">Json 읽기3</button><br>
+	<hr>
+	<div id="disp"></div>
+</body>
+
+</html>

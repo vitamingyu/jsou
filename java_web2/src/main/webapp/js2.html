@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+변수와 연산자<hr> <!-- html 주석 -->
+<script>
+	let aa; // 변수. 한 줄 주석 /* 여러 줄 주석 */
+	aa = 10; // 입력되는 데이터에 따라 type이 결정. type을 따로 주지 않음
+	let bb = 12.3;
+	const cc = 20; // 상수. java의 final처럼 생각하면 됨. 수정 불가
+	// cc=30;
+	document.write(aa,' ',bb,' ',cc);
+	let dd = false;
+	let ee = '문자열';
+	document.write(aa,' ',bb,' ',cc,' ',dd,' ',ee);
+	document.write('<br>');
+	{
+		let v1=1;
+		{
+			let v2=2;
+			{
+				let v3=3;
+				var v4=4;
+			}
+				// document.write(v3,' ',v2,' ',v1);
+				// 중괄호 영역 내에서만 유효한 지역 변수  => v3는 오류남
+				// v4는 중괄호와 관계없는 전역 변수. 괄호 밖에서도 가능함. 하지만 요즘의 js는 var안 써줌
+		}
+	}		
+	
+</script>
+<hr>
+<script>
+	let x=5,y=2;
+	let a,b,c;
+	a=b=c=3+3; // 할당 연산자 체이닝. 6을 abc모두가 갖게 됨
+	document.write(a,' ',b,' ',c);
+	document.write('<br>',x,' ',y); 
+	document.write('<br> 산술연산 : ',x + y); 
+	document.write('<br>',x / y, ' ',x % y); //나눈 값이랑 정수 나누고 나머지값
+	document.write('<br>',2 ** 3); //2^3
+	
+	document.write('<br> 관계연산 : ', x >= y, ' ',x != y);
+	document.write('<br> 논리연산 : ',x >= y && x != y); // ||는 or
+	document.write('<br> 누적 : ',x = x+1,' ',++x,' ',x++);
+	document.write('<br> 삼항연산 : ', (x>y)?100:35+25); // 조건이 참이면 100 아니면 뒤에꺼 찍어 60
+	
+	document.write('<br><br>type 확인 : ', 
+					typeof 1,' ',
+					typeof 1.5,' ',
+					typeof '123',' ',
+					typeof true);
+	document.write('<br><br>type 확인 : ', 
+					typeof false,' ',
+					typeof null,' ',
+					typeof undefined,' ',
+					typeof NaN);
+					
+// false, null, undefined, ' ', 0, NaN의 boolean 값은 false
+	
+	document.write('<br><br>',Boolean(0), ' ',Boolean(1),' ',Boolean(-12.3));
+	document.write('<br>','1'+2,' ',2 +'1',' ',2+2+'1');
+	let apple = "2";
+	let orange ="3";
+	document.write('<br>',apple+orange); // 23
+	document.write('<br>',+apple+ +orange); // 5.   + : 단항 덧셈 연산자(문자 앞에 붙으면 넘버의 역할을 함)
+	let tot = Number(apple) + Number(orange); // 형변환
+	document.write('<br>',tot); // 5의 출력값 나옴
+	document.write('<br>',String(2) + String(3)); // 형변환
+	
+	document.write('<br>','사과의 수는 ' + apple + '입니다');
+	document.write('<br>',`사과의 수는  ${apple}입니다`); 
+	// 백틱(`)을 사용하면 &{}를 사용해서 문자열과 변수를 적절히 같이 사용
+	
+	document.write('<br>');
+	let su1 = 5 == '5'; // true 형변환 후 값 비교
+	let su2 = 5 === '5'; // false 형변환 없이 값 비교. js에서는 ===을 권장한다. 이게 더 빠름
+	
+	document.write('<br>',`su1은 ${su1}이고 su2는 ${su2}이다.`);
+	
+	
+</script>
+</body>
+</html>
