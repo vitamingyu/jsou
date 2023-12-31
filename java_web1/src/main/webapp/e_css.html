@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>css test</title>
+<!-- internal style sheet -->
+<style type="text/css">
+h1{font-size: 50px; font-family: 궁서; 
+	color: rgb(225, 80, 55);
+	}
+	
+.c1{
+	color: rgb(0%, 0%, 100%);
+	}
+#kbs{
+	color: aqua;font-family: sans-serif;
+}
+</style>
+<!-- external style sheet -->
+<link rel="stylesheet" type="text/css" href="css/ex.css">
+</head>
+<body>
+css : HTML의 스타일을 적용하기 위한 표현언어<br>
+selector로 대상을 선택하고 원하는 스타일을 적용<br>
+방법 : inline, internl, external 3가지 방법이 있음
+<hr>
+연습을 시작하자 <span style="font-size: 30px; color: blue;">인라인 방식</span> 영역 확보
+<h1 style="color: yellow;"><i>인터널 방식</i></h1>
+<h1>h1기본적용</h1>
+<br>클래스를 선언해 스타일 적용</br>
+<p class="c1">c1클래스 사용 1</p>
+<h2 class="c1">h2 태그에 c1 클래스 사용2</h2>
+<p>일반적인 p태그</p>
+<i class="c1">i 태그에 c1 클래스 사용3</i>
+<br>
+<p id="kbs">p에 아이디 적용1</p>
+<div id="mbc">div에 아이디 적용1</div>
+id는 여러개에 줘도 오류는 안나지만 id는 중복을 꺼려함. 말 그대로 고윳값으로 지정해주는듯
+<p>보통의 p태그</p>
+<div id="sbs"> div 아이디 적용 - 별도의 css 파일 사용</div>
+<br>
+<form>
+	<table>
+		<tr>
+			<td>id 입력</td>
+			<td><input type="text" name="id"></td>
+		</tr>
+		<tr>
+			<td>name 입력</td>
+			<td><input type="text" name="name"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">
+				<input type="button" value="확인">				
+			</td>
+		</tr>
+	</table>
+	
+</form>
+<hr>
+
+<span>목요일</span><br>
+<strong>8월 초</strong><br>
+
+<a href="https://www.naver.com">네이버</a><br>
+<a href="a.html">가자 a문서 만나러</a><br>
+<br>
+<b> b tag</b><br>
+<div><b>div b tag</b></div>
+<div><span><b>div span b tag</b></span></div>
+<div><b id="hi">div b id:hi tag</b></div>
+<div><b class="hi">div b class:hi tag</b></div>
+
+<br>
+<div id="mypic">배경 이미지</div><br>
+<img src="images/daum.png"/>
+
+
+</body>
+</html>

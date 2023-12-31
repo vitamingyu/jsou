@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+클라이언트가 서버로 값 전달
+<br>
+<a href="d_receive.jsp?irum=tom&nai=22">서버로 값 전달</a><br>
+<!-- 256 혹은 1024글자(브라우저마다 다름)가 넘어가거나 보안 사항일 경우 저렇게 값을 다 써줄 수 없음-->
+GET 방식 : 소량의 자료를 요청 파일명 뒤에 parameter로 전송 -> 대량은 안됨, 보안의 문제가 있음
+<br>
+<form action="d_receive.jsp" method="post">
+	<!-- form태그에서 메소드 겟은 생략되어있음-->
+	<!-- form태그에서 메소드 포스트는 주소창에 데이터가 안보임-->
+	<table border="1">
+		<tr>
+			<td>이름 : </td>
+			<td><input type="text" name="irum" value="홍길동"></td>
+		</tr>
+		<tr>
+			<td>나이 : </td>
+			<td><input type="number" name="nai2" min="0" max="100" step="5"></td>
+		</tr>
+		<tr>
+			<td>나이 : </td>
+			<td><input type="text" name="nai" placeholder="숫자만"></td>
+		</tr>
+		<tr>
+			<td>비번 :</td>
+			<td><input type="password" name="passwd"></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="전송"></td>
+	        <td><input type="reset" value="초기화"></td>
+		</tr>
+	</table>
+</form>
+
+
+
+
+
+
+
+</body>
+</html>

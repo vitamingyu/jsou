@@ -1,0 +1,52 @@
+@charset "UTF-8";
+/* 이거 주석 */
+#sbs{
+	background-color: black;
+	color: yellow;
+	font-size: 20px;
+}
+
+table{
+	width: 70%;
+	margin-bottom: 10px;
+}
+
+.c1, .c2{
+	/*클래스도 복수 가능~*/
+}
+table tr td{ /* 테이블의 tr의 td 자식에 대해 조건을 줌 */
+	border-top: 1px solid #ff0000;
+	border-bottom: 2px dashed blue;
+	padding: 5px;
+}
+
+strong, span{ /* 콤마 써주면 엘리먼트 복수에 적용가능 */
+	font-size: 22px;
+	background-color: yellow;
+}
+
+/* 동적 선택자 : 해당 엘리먼트에서 이벤트가 발생하면 ~~을 준다 */
+input:focus{background-color: #78f;}
+a:link{text-decoration: none;} /* 링크에 밑줄 없어짐 */
+a:visited{color: red;} /* 방문한 경험이 있으면 레드*/
+a:active{font-family: 궁서;} /* 꾹 누르면 변함*/
+a:hover{color: cyan; font-size: 40px;} /* 포커스 올리면 변함 */
+ /* 인라인 인터널 익스터널 순으로 css우선순위 높음. 나중에 준게 더 높음 */
+ 
+b{font-size: 8px;}
+div, b{font-size: 8px;}  /* div와 b에 걸려*/
+div b{font-size: 16px;}  /* div 자손중 모든 b 걸려*/
+div > b {font-size: 24px;}  /* div의 '직계 b에만' 걸려 */
+div b#hi{font-size: 32px;} /* div의 자손 b중에서 id가 hi인 애만 걸려 */
+div b.hi{font-size: 40px;} /* div의 자손 b중에서 class가 hi인 애만 걸려 */
+
+div#mypic{
+	height: 150px;
+	background-image: url("../images/daum.png");
+	border: 1px dashed red;
+}
+
+img{
+	border: 3px solid blue;
+}
+
